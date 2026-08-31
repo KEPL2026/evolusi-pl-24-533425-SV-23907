@@ -1,8 +1,10 @@
 const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
 const eventCards = document.querySelectorAll(".event-card");
 
-searchInput.addEventListener("input", function () {
+function filterEvents() {
     const keyword = searchInput.value.toLowerCase();
+    const selectedCategory = categoryFilter.value;
 
     eventCards.forEach(function (eventCard) {
         const eventName = eventCard
@@ -10,10 +12,20 @@ searchInput.addEventListener("input", function () {
             .textContent
             .toLowerCase();
 
-        if (eventName.includes(keyword)) {
+        const eventCategory = eventCard.dataset.category;
+
+        const matchesSearch = eventName.includes(keyword);
+        const matchesCategory =
+            selectedCategory === "all" ||
+            eventCategory === selectedCategory;
+
+        if (matchesSearch && matchesCategory) {
             eventCard.style.display = "block";
         } else {
             eventCard.style.display = "none";
         }
     });
-});
+}
+
+searchInput.addEventListener("input", filterEvents);
+categoryFilter.addEventListener("change", filterEvents);
