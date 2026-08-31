@@ -51,6 +51,7 @@
                 <br><br>
 
                 <button type="submit">Daftar Sekarang</button>
+                <p id="successMessage"></p>
 
             </form>
         </section>
@@ -59,6 +60,20 @@
     <footer>
         <p>&copy; 2026 Campus Event Hub</p>
     </footer>
+
+    <script>
+    const registrationForm = document.getElementById("registrationForm");
+    const successMessage = document.getElementById("successMessage");
+
+    registrationForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        successMessage.textContent =
+            "Registrasi berhasil! Sampai jumpa di event.";
+
+        registrationForm.reset();
+    });
+</script>
 
 </body>
 </html>
