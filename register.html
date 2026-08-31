@@ -68,6 +68,28 @@
     registrationForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const selectedEvent = document.getElementById("event").value;
+
+        if (name.length < 3) {
+            successMessage.textContent =
+                "Nama harus terdiri dari minimal 3 karakter.";
+            return;
+        }
+
+        if (!email.includes("@")) {
+            successMessage.textContent =
+                "Silakan masukkan email yang valid.";
+            return;
+        }
+
+        if (selectedEvent === "") {
+            successMessage.textContent =
+                "Silakan pilih event terlebih dahulu.";
+            return;
+        }
+
         successMessage.textContent =
             "Registrasi berhasil! Sampai jumpa di event.";
 
