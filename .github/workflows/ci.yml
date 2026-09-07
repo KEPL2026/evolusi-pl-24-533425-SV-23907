@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  validate-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f index.html
+          test -f events.html
+          test -f register.html
+
+  validate-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate HTML structure
+        run: |
+          for file in index.html events.html register.html; do
+            grep -q "<html" "$file"
+            grep -q "</html>" "$file"
+          done
